@@ -43,6 +43,10 @@ function translate(text)
             ret += "?4 " + l + " ?4\n";
             continue;
         }
+
+        if (parms.length > 3)
+            ret += "    " + "scene " + parms[3] + "\n";
+
         if (parms[0] == "tell" && parms[2] == "emote")
         {
             ret += "    " + parms[1] + "\n";
@@ -53,8 +57,6 @@ function translate(text)
             ret += "    " + parms[0] + ' "' + parms[1] + '"' + "\n";
         }
 
-        if (parms.length > 3)
-            ret += "    " + "scene " + parms[3] + "\n";
         if (parms.length > 4)
             ret += "    " + "show " + parms[4] + "\n";
 
