@@ -30,22 +30,21 @@ function translate(text)
             ret += "? " + l + " ?\n";
             continue;
         }
-        var tokens = e[1].split('","');
-        const parms = [];
-        for (const t of tokens)
-        {
-            var noquote = t.replace(/^["']/, "");
-            noquote = noquote.replace(/["'](,null)*$/, "");
-            parms.push(desquare(noquote));
-        }
+        var papa = Papa.parse(e[1]);
+        var parms = []
+        for (const p of papa.data[0])
+            parms.push(desquare(p))
         if (parms.length < 3)
         {
-            ret += "?4 " + l + " ?4\n";
+            ret += "?3 " + l + " ?3\n";
             continue;
         }
 
-        if (parms.length > 3)
+        if (parms.length > 3 && parms[3] != "null")
             ret += "    " + "scene " + parms[3] + "\n";
+
+        if (parms.length > 4 && parms[4] != "null")
+            ret += "    " + "show " + parms[4] + "\n";
 
         if (parms[0] == "tell" && parms[2] == "emote")
         {
@@ -53,12 +52,11 @@ function translate(text)
         }
         else
         {
-            ret += "    " + "show " + parms[0] + "_" + parms[2] + "\n";
-            ret += "    " + parms[0] + ' "' + parms[1] + '"' + "\n";
+            if (parms[0] != "null" && parms[2] != "null")
+                ret += "    " + "show " + parms[0] + "_" + parms[2] + "\n";
+            if (parms[0] != "null" && parms[1] != "null")
+                ret += "    " + parms[0] + ' "' + parms[1] + '"' + "\n";
         }
-
-        if (parms.length > 4)
-            ret += "    " + "show " + parms[4] + "\n";
 
         ret += "\n";
     }
