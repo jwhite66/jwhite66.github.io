@@ -46,15 +46,17 @@ function translate(text)
         if (parms[0] == "tell" && parms[2] == "emote")
         {
             ret += "    " + parms[1] + "\n";
-            continue;
+        }
+        else
+        {
+            ret += "    " + "show " + parms[0] + "_" + parms[2] + "\n";
+            ret += "    " + parms[0] + ' "' + parms[1] + '"' + "\n";
         }
 
         if (parms.length > 3)
             ret += "    " + "scene " + parms[3] + "\n";
-        ret += "    " + "show " + parms[0] + "_" + parms[2] + "\n";
         if (parms.length > 4)
             ret += "    " + "show " + parms[4] + "\n";
-        ret += "    " + parms[0] + ' "' + parms[1] + '"' + "\n";
 
         ret += "\n";
     }
