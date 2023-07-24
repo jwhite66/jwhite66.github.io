@@ -48,7 +48,7 @@ function translate(text)
 
         if (parms[0] == "tell" && parms[2] == "emote")
         {
-            ret += "    " + parms[1] + "\n";
+            ret += '    "' + parms[1] + '"\n';
         }
         else
         {
