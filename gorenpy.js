@@ -52,10 +52,11 @@ function translate(text)
         }
         else
         {
-            if (parms[0] != "null" && parms[2] != "null")
-                ret += "    " + "show " + parms[0] + "_" + parms[2] + "\n";
             if (parms[0] != "null" && parms[1] != "null")
-                ret += "    " + parms[0] + ' "' + parms[1] + '"' + "\n";
+                if (parms[2] != "null")
+                    ret += "    " + parms[0] + " " + parms[2] + ' "' + parms[1] + '"' + "\n";
+                else
+                    ret += "    " + parms[0] + ' "' + parms[1] + '"' + "\n";
         }
 
         ret += "\n";
